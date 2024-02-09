@@ -1,5 +1,5 @@
 //
-//  BaseViewController.swift
+//  BaseTableViewCell.swift
 //  WeatherProj
 //
 //  Created by cho on 2/8/24.
@@ -7,19 +7,20 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseTableViewCell: UITableViewCell {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setAddView()
         configureAttribute()
         configureLayout()
         subViewDidLoad()
-
     }
     
-
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setAddView() {
         
     }
@@ -32,9 +33,9 @@ class BaseViewController: UIViewController {
         
     }
     
-    //자식뷰컨에서 원래 viewdidload에 써야할 부분들 넣는 메소드
     func subViewDidLoad() {
         
     }
-
+    
+    
 }
