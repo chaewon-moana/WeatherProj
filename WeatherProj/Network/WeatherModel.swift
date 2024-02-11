@@ -7,6 +7,9 @@
 
 import Foundation
 
+struct Model: Decodable {
+    let weatherModel: [WeatherModel]
+}
 struct WeatherModel: Decodable {
     let coord: Coord
     let weather: [Weather]
@@ -42,14 +45,14 @@ struct Main: Decodable {
     let temp_max: Double
     let pressure: Int
     let humidity: Int
-    let sea_level: Int
-    let grnd_level: Int
+    //let sea_level: Int
+    //let grnd_level: Int
 }
 
 struct Wind: Decodable {
     let speed: Double
     let deg: Int
-    let gust: Double
+    //let gust: Double
 }
 
 struct Clouds: Decodable {

@@ -27,6 +27,8 @@
 		DE7D55EC2B7510DA0060BE42 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D55EB2B7510DA0060BE42 /* BaseTableViewCell.swift */; };
 		DE7D55EF2B7650520060BE42 /* OpenWeatherAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D55EE2B7650520060BE42 /* OpenWeatherAPIManager.swift */; };
 		DE7D55F12B76525C0060BE42 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D55F02B76525C0060BE42 /* WeatherModel.swift */; };
+		DE7D56032B78FBCE0060BE42 /* WeatherLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D56022B78FBCE0060BE42 /* WeatherLabel.swift */; };
+		DE7D56052B79034C0060BE42 /* WeatherDaily.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D56042B79034C0060BE42 /* WeatherDaily.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		DE7D55EB2B7510DA0060BE42 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		DE7D55EE2B7650520060BE42 /* OpenWeatherAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherAPIManager.swift; sourceTree = "<group>"; };
 		DE7D55F02B76525C0060BE42 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		DE7D56022B78FBCE0060BE42 /* WeatherLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLabel.swift; sourceTree = "<group>"; };
+		DE7D56042B79034C0060BE42 /* WeatherDaily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDaily.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 		DE7D55B82B750BB50060BE42 /* WeatherProj */ = {
 			isa = PBXGroup;
 			children = (
+				DE7D56012B78FBBD0060BE42 /* Custom */,
 				DE7D55ED2B7650300060BE42 /* Network */,
 				DE7D55E62B750F810060BE42 /* Extension */,
 				DE7D55E12B750D6B0060BE42 /* Map */,
@@ -150,8 +155,17 @@
 			children = (
 				DE7D55EE2B7650520060BE42 /* OpenWeatherAPIManager.swift */,
 				DE7D55F02B76525C0060BE42 /* WeatherModel.swift */,
+				DE7D56042B79034C0060BE42 /* WeatherDaily.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DE7D56012B78FBBD0060BE42 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				DE7D56022B78FBCE0060BE42 /* WeatherLabel.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,12 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE7D56052B79034C0060BE42 /* WeatherDaily.swift in Sources */,
 				DE7D55DC2B750D0B0060BE42 /* BaseViewController.swift in Sources */,
 				DE7D55BE2B750BB50060BE42 /* ViewController.swift in Sources */,
 				DE7D55BA2B750BB50060BE42 /* AppDelegate.swift in Sources */,
 				DE7D55E82B750F8E0060BE42 /* UIView+Extension.swift in Sources */,
 				DE7D55D02B750BF10060BE42 /* APIKey.swift in Sources */,
 				DE7D55F12B76525C0060BE42 /* WeatherModel.swift in Sources */,
+				DE7D56032B78FBCE0060BE42 /* WeatherLabel.swift in Sources */,
 				DE7D55EC2B7510DA0060BE42 /* BaseTableViewCell.swift in Sources */,
 				DE7D55BC2B750BB50060BE42 /* SceneDelegate.swift in Sources */,
 				DE7D55E32B750D800060BE42 /* CitySearchViewController.swift in Sources */,
