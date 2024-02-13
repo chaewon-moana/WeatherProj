@@ -11,19 +11,19 @@ struct Model: Decodable {
     let weatherModel: [WeatherModel]
 }
 struct WeatherModel: Decodable {
-    let coord: Coord
+    //let coord: Coord
     let weather: [Weather]
-    let base: String
+    //let base: String
     let main: Main
-    let visibility: Int
-    let wind: Wind
-    let clouds: Clouds
-    let dt: Int
-    let sys: Sys
-    let timezone: Int
+    //let visibility: Int
+    //let wind: Wind
+    //let clouds: Clouds
+    //let dt: Int
+    //let sys: Sys
+    //let timezone: Int
     let id: Int
     let name: String
-    let cod: Int
+    //let cod: Int
 }
 
 struct Coord: Decodable {
@@ -43,8 +43,8 @@ struct Main: Decodable {
     let feels_like: Double
     let temp_min: Double
     let temp_max: Double
-    let pressure: Int
-    let humidity: Int
+    //let pressure: Int
+    //let humidity: Int
     
     var calTemp: String {
         return String(Int(round(temp)))

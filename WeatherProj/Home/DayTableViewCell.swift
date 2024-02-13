@@ -22,7 +22,8 @@ final class DayTableViewCell: BaseTableViewCell {
     override func configureLayout() {
         dayLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
-            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(8)
+            make.leading.equalTo(contentView.safeAreaLayoutGuide).offset(16)
+            make.width.equalTo(40)
         }
         
         dayWeatherImageView.snp.makeConstraints { make in
@@ -33,7 +34,8 @@ final class DayTableViewCell: BaseTableViewCell {
         
         minTempLabel.snp.makeConstraints { make in
             make.centerY.equalTo(contentView.safeAreaLayoutGuide)
-            make.leading.equalTo(dayWeatherImageView.snp.trailing).offset(12)
+            make.leading.equalTo(dayWeatherImageView.snp.trailing).offset(20)
+            make.width.equalTo(100)
         }
         
         maxTempLabel.snp.makeConstraints { make in

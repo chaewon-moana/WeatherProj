@@ -9,40 +9,19 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-enum Week: String, CaseIterable {
-    case today = "오늘"
-    case secondDay
-    case thirdDay
-    case forthDay
-    case fifthDay
-}
-
 final class HomeViewController: BaseViewController {
 
-    let cityNameLabel = WeatherLabel()
-    let mainTemperatureLabel = WeatherLabel()
-    let weatherImageView = UIImageView()
-    let weatherLabel = WeatherLabel()
-    let subTemperatureLabel = WeatherLabel()
-    let forecastTableView = UITableView()
-    let forecastCollectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout())
-    let underLineView = UIView()
-    let mapButton = UIButton()
-    let cityListButton = UIButton()
+    let homeView = HomeView()
     
     let apiManager = OpenWeatherAPIManager.shared
-    var weatherList: WeatherModel?
     var dailyWeatherList = WeatherDaily(message: 0, cnt: 0, list: [], city: City(id: 0, name: "", country: "", population: 0, timezone: 0, sunrise: 0, sunset: 0))
     
+    var weatherList = WeatherModel(weather: [], main: Main(temp: 0, feels_like: 0, temp_min: 0, temp_max: 0), id: 0, name: "")
+    
     var weekArray: [String] = []
+    
+    //MARK: 그런데 이러면 날짜가 바뀔 때마다 새로운 공간이 생겨나는 것 아닌가?, 영구적으로 저장되는 것이 아니라 상관없나,,,,?
     var tmpList: [DayWeatherInfo] = []
-    
-    
-    override func setAddView() {
-        view.addSubviews([cityNameLabel, mainTemperatureLabel, weatherLabel, subTemperatureLabel, forecastTableView,underLineView, mapButton, cityListButton, weatherImageView, forecastCollectionView])
-        
-        forecastCollectionView.backgroundColor = .yellow
-    }
     
     private func hourFormatter(_ date: String) -> String {
         //TODO: Date()로 현재 date받아와서 오늘, 내일 표시할 수 있도록 해보기
@@ -81,64 +60,9 @@ final class HomeViewController: BaseViewController {
        
         return myDateFormatter.string(from: convertDate!)
     }
-    override func configureLayout() {
-        cityNameLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.height.equalTo(20)
-        }
-        
-        mainTemperatureLabel.snp.makeConstraints { make in
-            make.top.equalTo(cityNameLabel.snp.bottom).offset(10)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(80)
-        }
-        
-        weatherImageView.snp.makeConstraints { make in
-            make.size.equalTo(100)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalTo(mainTemperatureLabel.snp.bottom)
-        }
-        
-        weatherLabel.snp.makeConstraints { make in
-            make.top.equalTo(weatherImageView.snp.bottom)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(20)
-        }
-        
-        subTemperatureLabel.snp.makeConstraints { make in
-            make.top.equalTo(weatherLabel.snp.bottom).offset(8)
-            make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(20)
-        }
-        
-        forecastCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(subTemperatureLabel.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.height.equalTo(200)
-        }
-        
-        forecastTableView.snp.makeConstraints { make in
-            make.top.equalTo(forecastCollectionView.snp.bottom).offset(8)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).offset(8)
-            make.bottom.equalTo(underLineView.snp.top)
-        }
-        
-        underLineView.snp.makeConstraints { make in
-            make.top.equalTo(forecastTableView.snp.bottom)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.snp.bottom).offset(12)
-            make.height.equalTo(1)
-        }
-    }
     
-    override func configureAttribute() {
-        mainTemperatureLabel.font = .boldSystemFont(ofSize: 30)
-        
-        weatherImageView.contentMode = .scaleAspectFit
-        
-        underLineView.layer.borderColor = UIColor.gray.cgColor
-        underLineView.layer.borderWidth = 1
+    override func loadView() {
+        self.view = homeView
     }
     
     private func set5Day(_ weather: WeatherDaily) {
@@ -160,7 +84,7 @@ final class HomeViewController: BaseViewController {
                 }
             }
         }
-        forecastTableView.reloadData()
+        homeView.forecastTableView.reloadData()
     }
     
     override func subViewDidLoad() {
@@ -174,51 +98,38 @@ final class HomeViewController: BaseViewController {
             group.leave()
         }
        
-        
         group.enter()
         apiManager.callRequest { model in
             //TODO: weather[0] 해놓은거 처리
             self.weatherList = model
-            self.cityNameLabel.text = model.name
-            self.mainTemperatureLabel.text = model.main.calTemp
-            let url = URL(string: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png")
-            self.weatherImageView.kf.setImage(with: url)
-            self.weatherLabel.text = model.weather[0].description
-            self.subTemperatureLabel.text = "최저 : \(round(model.main.temp_min))°  최고 : \(round(model.main.temp_max))°"
             group.leave()
         }
         
+        homeView.forecastTableView.delegate = self
+        homeView.forecastTableView.dataSource = self
         
-        forecastTableView.delegate = self
-        forecastTableView.dataSource = self
+        homeView.forecastCollectionView.delegate = self
+        homeView.forecastCollectionView.dataSource = self
         
-        forecastCollectionView.delegate = self
-        forecastCollectionView.dataSource = self
-        
-        forecastCollectionView.register(DailyForecastCollectionViewCell.self, forCellWithReuseIdentifier: "DailyForecastCollectionViewCell")
-        forecastTableView.register(DayTableViewCell.self, forCellReuseIdentifier: "DayTableViewCell")
+        homeView.forecastCollectionView.register(DailyForecastCollectionViewCell.self, forCellWithReuseIdentifier: "DailyForecastCollectionViewCell")
+        homeView.forecastTableView.register(DayTableViewCell.self, forCellReuseIdentifier: "DayTableViewCell")
         
         group.notify(queue: .main) {
-            self.forecastTableView.reloadData()
-            self.forecastCollectionView.reloadData()
+            self.homeView.forecastTableView.reloadData()
+            self.homeView.forecastCollectionView.reloadData()
+            self.setCurrentView()
             print(self.dailyWeatherList.list.count)
             print("돼앴따")
         }
     }
     
-    static func collectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let spacing: CGFloat = 4
-        let cellWidth = UIScreen.main.bounds.width - spacing
-        layout.itemSize = CGSize(width: cellWidth / 5, height: 180)
-        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        layout.scrollDirection = .horizontal
-        
-        return layout
+    func setCurrentView() {
+        homeView.cityNameLabel.text = weatherList.name
+        homeView.mainTemperatureLabel.text = "\(weatherList.main.calTemp)°"
+        let url = URL(string: "https://openweathermap.org/img/wn/\(weatherList.weather[0].icon)@2x.png")
+        homeView.weatherImageView.kf.setImage(with: url)
+        homeView.weatherLabel.text = weatherList.weather[0].description
     }
-    
-
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -237,7 +148,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         
         forecastCell.backgroundColor = .blue
         let item = tmpList[indexPath.item]
-        forecastCell.dayLabel.text = item.weekDay
+        forecastCell.dayLabel.text = indexPath.item == 0 ? "오늘" : item.weekDay
         forecastCell.minTempLabel.text = "최저 : \(item.minTemp)°"
         forecastCell.maxTempLabel.text = "최고 : \(item.maxTemp)°"
         let url = URL(string: "https://openweathermap.org/img/wn/\(item.weatherIcon)@2x.png")
@@ -258,7 +169,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DailyForecastCollectionViewCell", for: indexPath) as! DailyForecastCollectionViewCell
         
         cell.dayLabel.text = hourFormatter(dailyWeatherList.list[indexPath.item].dtTxt)
-        
         let url = URL(string: "https://openweathermap.org/img/wn/\(dailyWeatherList.list[indexPath.item].weather[0].icon)@2x.png")
         cell.dayWeatherImageView.kf.setImage(with: url)
         cell.dayTempLabel.text = "\(round((dailyWeatherList.list[indexPath.item].main.temp)))°"
@@ -266,8 +176,5 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
- 
-    
 
-    
 }

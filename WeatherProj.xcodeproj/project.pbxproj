@@ -32,6 +32,8 @@
 		DE7D56092B7B23960060BE42 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D56082B7B23960060BE42 /* BaseCollectionViewCell.swift */; };
 		DE7D560B2B7B31C70060BE42 /* DayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D560A2B7B31C70060BE42 /* DayTableViewCell.swift */; };
 		DE7D560F2B7B592B0060BE42 /* DayWeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D560E2B7B592B0060BE42 /* DayWeatherInfo.swift */; };
+		DE7D56112B7B65D70060BE42 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D56102B7B65D70060BE42 /* BaseView.swift */; };
+		DE7D56132B7B65FC0060BE42 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7D56122B7B65FC0060BE42 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		DE7D56082B7B23960060BE42 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DE7D560A2B7B31C70060BE42 /* DayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTableViewCell.swift; sourceTree = "<group>"; };
 		DE7D560E2B7B592B0060BE42 /* DayWeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherInfo.swift; sourceTree = "<group>"; };
+		DE7D56102B7B65D70060BE42 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		DE7D56122B7B65FC0060BE42 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 				DE7D55DB2B750D0B0060BE42 /* BaseViewController.swift */,
 				DE7D55EB2B7510DA0060BE42 /* BaseTableViewCell.swift */,
 				DE7D56082B7B23960060BE42 /* BaseCollectionViewCell.swift */,
+				DE7D56102B7B65D70060BE42 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				DE7D56062B7B235F0060BE42 /* DailyForecastCollectionViewCell.swift */,
 				DE7D560A2B7B31C70060BE42 /* DayTableViewCell.swift */,
 				DE7D560E2B7B592B0060BE42 /* DayWeatherInfo.swift */,
+				DE7D56122B7B65FC0060BE42 /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -272,9 +278,11 @@
 				DE7D560B2B7B31C70060BE42 /* DayTableViewCell.swift in Sources */,
 				DE7D55EC2B7510DA0060BE42 /* BaseTableViewCell.swift in Sources */,
 				DE7D55BC2B750BB50060BE42 /* SceneDelegate.swift in Sources */,
+				DE7D56132B7B65FC0060BE42 /* HomeView.swift in Sources */,
 				DE7D55E32B750D800060BE42 /* CitySearchViewController.swift in Sources */,
 				DE7D55EF2B7650520060BE42 /* OpenWeatherAPIManager.swift in Sources */,
 				DE7D55DE2B750D570060BE42 /* HomeViewController.swift in Sources */,
+				DE7D56112B7B65D70060BE42 /* BaseView.swift in Sources */,
 				DE7D560F2B7B592B0060BE42 /* DayWeatherInfo.swift in Sources */,
 				DE7D55E52B750D8A0060BE42 /* MapViewController.swift in Sources */,
 			);

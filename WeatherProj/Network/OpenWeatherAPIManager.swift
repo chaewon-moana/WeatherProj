@@ -19,7 +19,7 @@ class OpenWeatherAPIManager {
         AF.request(url).responseDecodable(of: WeatherModel.self) { response in
             switch response.result {
             case .success(let success):
-                //print(success)
+                dump(success)
                 compleionHandler(success)
             case .failure(let failure):
                 print(failure)
