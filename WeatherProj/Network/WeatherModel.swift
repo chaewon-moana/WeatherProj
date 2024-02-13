@@ -45,6 +45,18 @@ struct Main: Decodable {
     let temp_max: Double
     let pressure: Int
     let humidity: Int
+    
+    var calTemp: String {
+        return String(Int(round(temp)))
+    }
+    
+    var calMaxTemp: String {
+        return String(Int(round(temp_max)))
+    }
+    
+    var calMinTemp: String {
+        return String(Int(round(temp_min)))
+    }
     //let sea_level: Int
     //let grnd_level: Int
 }

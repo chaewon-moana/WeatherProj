@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-// MARK: - Book
 struct WeatherDaily: Decodable {
     //let cod: String
     let message, cnt: Int
@@ -16,7 +14,6 @@ struct WeatherDaily: Decodable {
     let city: City
 }
 
-// MARK: - City
 struct City: Decodable {
     let id: Int
     let name: String
@@ -30,7 +27,6 @@ struct City: Decodable {
 //    let lat, lon: Double
 //}
 
-// MARK: - List
 struct List: Decodable {
     let dt: Int
     let main: MainClass
@@ -49,12 +45,10 @@ struct List: Decodable {
     }
 }
 
-// MARK: - Clouds
 struct CloudsDay: Decodable {
     let all: Int
 }
 
-// MARK: - MainClass
 struct MainClass: Decodable {
     let temp, feelsLike, tempMin, tempMax: Double
     let pressure, seaLevel, grndLevel, humidity: Int
@@ -73,7 +67,6 @@ struct MainClass: Decodable {
     }
 }
 
-// MARK: - Rain
 struct Rain: Decodable {
     let the3H: Double
 
@@ -82,7 +75,6 @@ struct Rain: Decodable {
     }
 }
 
-// MARK: - Sys
 struct SysDay: Decodable {
     let pod: Pod
 }
@@ -92,22 +84,21 @@ enum Pod: String, Decodable {
     case n = "n"
 }
 
-// MARK: - Weather
 struct WeatherForecast: Decodable {
     let id: Int
     let main: MainEnum
-    let description: Description
+    let description: String
     let icon: String
 }
 
-enum Description: String, Decodable {
-    case brokenClouds = "broken clouds"
-    case clearSky = "clear sky"
-    case fewClouds = "few clouds"
-    case lightRain = "light rain"
-    case overcastClouds = "overcast clouds"
-    case scatteredClouds = "scattered clouds"
-}
+//enum Description: String, Decodable {
+//    case brokenClouds = "broken clouds"
+//    case clearSky = "clear sky"
+//    case fewClouds = "few clouds"
+//    case lightRain = "light rain"
+//    case overcastClouds = "overcast clouds"
+//    case scatteredClouds = "scattered clouds"
+//}
 
 enum MainEnum: String, Decodable {
     case clear = "Clear"
@@ -115,7 +106,6 @@ enum MainEnum: String, Decodable {
     case rain = "Rain"
 }
 
-// MARK: - Wind
 struct WindDay: Decodable {
     let speed: Double
     let deg: Int

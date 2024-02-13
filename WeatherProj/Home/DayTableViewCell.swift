@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class DayTableViewCell: BaseTableViewCell {
+final class DayTableViewCell: BaseTableViewCell {
 
     let dayLabel = UILabel()
     let dayWeatherImageView = UIImageView()

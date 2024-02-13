@@ -8,14 +8,14 @@
 import UIKit
 import SnapKit
 
-class DailyForecastCollectionViewCell: BaseCollectionViewCell {
+final class DailyForecastCollectionViewCell: BaseCollectionViewCell {
     
     let dayLabel = UILabel()
     let dayWeatherImageView = UIImageView()
     let dayTempLabel = UILabel()
     
     override func subViewDidLoad() {
-        
+        contentView.backgroundColor = .red
     }
     
     override func setAddView() {
