@@ -105,6 +105,14 @@ final class HomeViewController: BaseViewController {
             group.leave()
         }
         
+        group.notify(queue: .main) {
+            self.homeView.forecastTableView.reloadData()
+            self.homeView.forecastCollectionView.reloadData()
+            self.setCurrentView()
+            print(self.dailyWeatherList.list.count)
+            print("돼앴따")
+        }
+        
         homeView.forecastTableView.delegate = self
         homeView.forecastTableView.dataSource = self
         
@@ -114,13 +122,15 @@ final class HomeViewController: BaseViewController {
         homeView.forecastCollectionView.register(DailyForecastCollectionViewCell.self, forCellWithReuseIdentifier: "DailyForecastCollectionViewCell")
         homeView.forecastTableView.register(DayTableViewCell.self, forCellReuseIdentifier: "DayTableViewCell")
         
-        group.notify(queue: .main) {
-            self.homeView.forecastTableView.reloadData()
-            self.homeView.forecastCollectionView.reloadData()
-            self.setCurrentView()
-            print(self.dailyWeatherList.list.count)
-            print("돼앴따")
-        }
+        homeView.cityListButton.addTarget(self, action: #selector(cityListButtonTapped), for: .touchUpInside)
+
+    }
+    
+    @objc func cityListButtonTapped() {
+        print("눌려땅")
+        let vc = CitySearchViewController()
+     
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func setCurrentView() {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DayWeatherInfo {
+struct DayWeatherInfo: Decodable {
     var minTemp: Double
     var maxTemp: Double
     var weekDay: String

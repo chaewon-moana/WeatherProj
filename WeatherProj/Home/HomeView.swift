@@ -29,7 +29,7 @@ class HomeView: BaseView {
     override func configureLayout() {
         cityNameLabel.snp.makeConstraints { make in
             make.centerX.equalTo(safeAreaLayoutGuide)
-            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.top.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(20)
         }
         
@@ -84,8 +84,6 @@ class HomeView: BaseView {
     }
     
     override func configureAttribute() {
-        
-        cityListButton.addTarget(self, action: #selector(touchButton), for: .touchUpInside)
         underView.backgroundColor = .gray
         
         cityListButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
@@ -97,9 +95,8 @@ class HomeView: BaseView {
         underLineView.layer.borderColor = UIColor.gray.cgColor
         underLineView.layer.borderWidth = 1
     }
-    @objc func touchButton() {
-        print("버어튼 눌림")
-    }
+    
+    
     static func collectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         
