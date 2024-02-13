@@ -27,13 +27,14 @@ class OpenWeatherAPIManager {
         }
     }
     
-    func callRequestDaily() {
+    func callRequestDaily(completionHandler: @escaping ((WeatherDaily) -> Void)) {
         let url = "https://api.openweathermap.org/data/2.5/forecast?lat=37.654165&lon=127.049696&cnt=5&appid=\(APIKey.apiKey)"
         
         AF.request(url).responseDecodable(of: WeatherDaily.self) { response in
             switch response.result {
             case .success(let success):
                 dump(success)
+                completionHandler(success)
             case .failure(let failure):
                 print(failure)
             }
